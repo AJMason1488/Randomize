@@ -1,0 +1,77 @@
+#include "stdafx.h"
+#include <iostream>
+#include <iomanip>
+#include <ctime>
+
+
+using namespace std;
+
+
+int _tmain()
+{
+	setlocale(LC_ALL, "Russian");
+
+	srand(time(NULL)); // генерирует случайные числа при каждом запуске программы, в данном случае при выборе арифметического действия
+
+	const int SIZE = 100; // диапазн используемых чисел
+	const int ROWS = 3; // кол-во чисел в массиве
+
+	int** asd = new int* [ROWS];
+
+	for (int i = 0; i < ROWS; i++)
+	{
+		asd[i] = new int[SIZE];
+	}
+
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < SIZE; j++)
+		{
+			asd[i][j] = rand() % 100;
+		}
+	}
+
+	cout << "____________________________________________________________________" << endl << endl;
+	cout << "ВЫПОЛНЕНИЕ АРИФМЕТИЧЕСКИХ ДЕЙСТВИЙ С ИСПОЛЬЗОВАНИЕМ СЛУЧАЙНЫХ ЧИСЕЛ" << endl;
+	cout << "____________________________________________________________________" << endl << endl;
+
+	for (int j = 0; j < SIZE; j++)
+	{
+		cout << "Выберите действие: " << endl << endl;
+		cout << "1 - Умножение" << endl;
+		cout << "2 - Сложение" << endl;
+		cout << "3 - Вычитание" << endl;
+		cout << "4 - Деление" << endl << endl;
+		cout << "0 - Выход" << endl << endl;
+
+		int n;
+		cin >> n;
+
+		switch (n)
+		{
+		case 1:
+			asd[2][j] = asd[0][j] * asd[1][j]; //запись решения в третий элемент массива
+			cout << endl << "Результат выполнения функции \"умножение\": " << asd[0][j] << " * " << asd[1][j] << " = " << asd[2][j] << endl << endl;
+			break;
+		case 2:
+			asd[2][j] = asd[0][j] + asd[1][j];
+			cout << endl << "Результат выполнения функции \"сложение\": " << asd[0][j] << " + " << asd[1][j] << " = " << asd[2][j] << endl << endl;
+			break;
+		case 3:
+			asd[2][j] = asd[0][j] - asd[1][j];
+			cout << endl << "Результат выполнения функции \"вычитание\": " << asd[0][j] << " - " << asd[1][j] << " = " << asd[2][j] << endl << endl;
+			break;
+		case 4:
+			asd[2][j] = asd[0][j] / asd[1][j];
+			cout << endl << "Результат выполнения функции \"деление\": " << asd[0][j] << " / " << asd[1][j] << " = " << asd[2][j] << endl << endl;
+			break;
+		case 0: return 0; break;
+		}
+	}
+	for (int i = 0; i < ROWS; i++)
+	{
+		delete[] asd[i]; // очистка массива
+	}
+	delete[] asd;
+	system ("PAUSE");
+}
